@@ -11,6 +11,9 @@ import java.time.Duration;
 public class TC001AccountRegistrationTest extends BaseClass {
     @Test
     public void verifyAccountRegistration(){
+
+        logger.info("*****--Starting test Execution!--*****");
+
         driver.get("https://tutorialsninja.com/demo/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         HomePage homePage = new HomePage(driver);
