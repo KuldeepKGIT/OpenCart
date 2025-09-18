@@ -6,8 +6,6 @@ import com.kuldeepkumar290497.testBase.BaseClass;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class TC001AccountRegistrationTest extends BaseClass {
     @Test
     public void verifyAccountRegistration(){
@@ -16,8 +14,7 @@ public class TC001AccountRegistrationTest extends BaseClass {
         logger.debug("This is a debug log message");
 
         try {
-            driver.get(p.getProperty("appURL"));
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
             HomePage homePage = new HomePage(driver);
 
             homePage.ClickMyAccount();

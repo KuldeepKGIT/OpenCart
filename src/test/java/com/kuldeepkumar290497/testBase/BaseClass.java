@@ -13,6 +13,7 @@ import org.testng.annotations.Parameters;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 public class BaseClass {
@@ -45,6 +46,8 @@ public class BaseClass {
 
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
+        driver.get(p.getProperty("appURL"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @AfterClass
