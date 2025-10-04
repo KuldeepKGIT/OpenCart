@@ -9,13 +9,13 @@ import org.testng.annotations.Test;
 
 public class TC002LoginAccountTest extends BaseClass {
 
-    @Test
+    @Test(groups = {"Sanity","Master"})
     public void loginAccount(){
 
         logger.info("***** Starting the Login account Test *****");
         logger.debug("capturing application debug logs....");
         try {
-
+            System.out.println("Driver instance in test: " + driver);
             HomePage hp = new HomePage(driver);
             hp.ClickMyAccount();
             logger.info("Clicked on MyAccount Link...");

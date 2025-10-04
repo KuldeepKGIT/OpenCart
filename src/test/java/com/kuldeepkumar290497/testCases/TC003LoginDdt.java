@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TC003LoginDDT extends BaseClass {
+public class TC003LoginDdt extends BaseClass {
 
     @Test(dataProvider="dp")
     public void verifyLoginDDT(String email, String password, String exp){
@@ -36,7 +36,7 @@ public class TC003LoginDDT extends BaseClass {
             boolean targetPage = myAccountPage.isMyAccountDisplayed();
             if(exp.equalsIgnoreCase("Valid")){
                 if(targetPage){
-                    myAccountPage.clickLogout();
+                   myAccountPage.clickLogout();
                     Assert.assertTrue(true);
                 }
                 else {
@@ -45,7 +45,7 @@ public class TC003LoginDDT extends BaseClass {
             }
             if(exp.equalsIgnoreCase("Invalid")){
                 if(targetPage){
-                    myAccountPage.clickLogout();
+                   myAccountPage.clickLogout();
                     Assert.fail();
                 }
                 else {

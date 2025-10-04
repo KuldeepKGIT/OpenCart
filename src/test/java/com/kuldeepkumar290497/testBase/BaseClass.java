@@ -7,9 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,10 +16,14 @@ import java.util.Properties;
 
 public class BaseClass {
     public WebDriver driver;
-    public Logger logger;
+    public static Logger logger;
     public Properties p;
 
-    @BeforeClass
+    public BaseClass(){
+        logger = LogManager.getLogger(this.getClass()); //log4j for logs purpose.
+    }
+
+    @BeforeClass(alwaysRun = true)
     @Parameters({"os","browser"})
     public void setup(String os, String br) throws IOException
     {
@@ -30,7 +32,7 @@ public class BaseClass {
         p = new Properties();
         p.load(file);
 
-        logger = LogManager.getLogger(this.getClass()); //log4j for logs purpose.
+
         switch (br.toLowerCase()){
             case "edge":{
                 driver = new EdgeDriver();
@@ -50,7 +52,7 @@ public class BaseClass {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown(){
         driver.quit();
     }

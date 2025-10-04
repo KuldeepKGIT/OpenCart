@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TC001AccountRegistrationTest extends BaseClass {
-    @Test
+    @Test(groups = {"Regression","Master"})
     public void verifyAccountRegistration(){
 
         logger.info("*****--Starting test Execution!--*****");
