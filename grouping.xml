@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" >
+    <listeners>
+        <listener class-name="com.kuldeepkumar290497.utilities.ExtentReportManager"/>
+    </listeners>
     <test thread-count="5"   name="Test" >
         <parameter name="os" value="Windows"/>
         <parameter name="browser" value="chrome"/>
@@ -8,7 +11,7 @@
             <run>
                 <include name="Master"/>
 
-                <exclude name="Regression"/>
+                <include name="Regression"/>
             </run>
         </groups>
         <classes>
