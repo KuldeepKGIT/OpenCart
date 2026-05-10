@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Grid Test Suite" parallel="tests" thread-count="5" >
+    <listeners>
+        <listener class-name="com.kuldeepkumar290497.utilities.ExtentReportManager"/>
+    </listeners>
+    <test    name="Chrome Test">
+        <parameter name="os" value="Windows"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.kuldeepkumar290497.testCases.TC001AccountRegistrationTest"/>
+             <class name="com.kuldeepkumar290497.testCases.TC002LoginAccountTest"/>
+<!--            <class name="com.kuldeepkumar290497.testCases.TC003LoginDdt"/>-->
+        </classes>
+    </test>
+    <test   name="MSEdge Test" >
+        <parameter name="os" value="Windows"/>
+        <parameter name="browser" value="edge"/>
+        <classes>
+            <class name="com.kuldeepkumar290497.testCases.TC001AccountRegistrationTest"/>
+            <class name="com.kuldeepkumar290497.testCases.TC002LoginAccountTest"/>
+            <!--            <class name="com.kuldeepkumar290497.testCases.TC003LoginDdt"/>-->
+        </classes>
+    </test>
+</suite>
