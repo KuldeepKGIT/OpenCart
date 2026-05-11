@@ -18,18 +18,18 @@ public class TC003LoginDdt extends BaseClass {
 
         //HomePage
         try {
-            HomePage homePage = new HomePage(driver);
+            HomePage homePage = new HomePage(getDriver());
             homePage.ClickMyAccount();
             homePage.ClickLogin();
 
             // LoginPage
 
-            LoginPage loginPage = new LoginPage(driver);
+            LoginPage loginPage = new LoginPage(getDriver());
             loginPage.setEmail(email);
             loginPage.setPassword(password);
             loginPage.clickLogin();
 
-            MyAccountPage myAccountPage = new MyAccountPage(driver);
+            MyAccountPage myAccountPage = new MyAccountPage(getDriver());
 
 
 

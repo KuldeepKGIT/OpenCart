@@ -24,12 +24,21 @@ import java.util.Date;
 import java.util.Properties;
 
 public class BaseClass {
-    public static WebDriver driver;
+//    public static WebDriver driver;
+private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public static Logger logger;
     public Properties p;
 
     public BaseClass(){
         logger = LogManager.getLogger(this.getClass()); //log4j for logs purpose.
+    }
+    // Getter for driver - use this everywhere instead of direct access
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
+    // Setter for driver
+    public static void setDriver(WebDriver webDriver) {
+        driver.set(webDriver);
     }
 
     @BeforeClass(alwaysRun = true)
@@ -40,6 +49,7 @@ public class BaseClass {
         FileReader file = new FileReader(System.getProperty("user.dir")+"/src/test/resources/config.properties");
         p = new Properties();
         p.load(file);
+        WebDriver webDriver = null;
 
         if(p.getProperty("execution_env").equalsIgnoreCase("remote")){
             DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -64,34 +74,37 @@ public class BaseClass {
                 default: System.out.println("No matching browser"); return;
             }
 
-            driver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),capabilities);
+            webDriver =new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),capabilities);
         }
 
 
         if(p.getProperty("execution_env").equalsIgnoreCase("local")){
             switch (br.toLowerCase()){
                 case "edge":{
-                    driver = new EdgeDriver();
+                    webDriver = new EdgeDriver();
                     break;
                 }
                 case "chrome":{
-                    driver = new ChromeDriver();
+                    webDriver = new ChromeDriver();
                     break;
                 }
                 default:
                     System.out.println("No Matching browser found!");
             }
         }
-
-        driver.manage().deleteAllCookies();
-        driver.manage().window().maximize();
-        driver.get(p.getProperty("appURL"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+// Set the driver for this thread
+        setDriver(webDriver);
+        getDriver().manage().deleteAllCookies();
+        getDriver().manage().window().maximize();
+        getDriver().get(p.getProperty("appURL"));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown(){
-        driver.quit();
+        if(getDriver() != null)
+         getDriver().quit();
+        driver.remove();
     }
 
     public String randomString(){
@@ -112,7 +125,7 @@ public class BaseClass {
 
         String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 
-        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+        TakesScreenshot takesScreenshot = (TakesScreenshot) getDriver();
         File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
 
         String targetFilePath=System.getProperty("user.dir")+"\\screenshots\\" + tname + "_" + timeStamp + ".png";

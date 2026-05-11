@@ -15,14 +15,14 @@ public class TC001AccountRegistrationTest extends BaseClass {
 
         try {
 
-            HomePage homePage = new HomePage(driver);
+            HomePage homePage = new HomePage(getDriver());
 
             homePage.ClickMyAccount();
             logger.info("Click on MyAccount Link...");
             homePage.ClickRegister();
             logger.info("Click on Register Account Link...");
 
-            AccountRegistrationPage regPage = new AccountRegistrationPage(driver);
+            AccountRegistrationPage regPage = new AccountRegistrationPage(getDriver());
 
             logger.info("Providing customer details...");
             regPage.setFirstName(randomString());

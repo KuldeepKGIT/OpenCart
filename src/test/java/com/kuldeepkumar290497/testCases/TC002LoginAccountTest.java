@@ -15,21 +15,21 @@ public class TC002LoginAccountTest extends BaseClass {
         logger.info("***** Starting the Login account Test *****");
         logger.debug("capturing application debug logs....");
         try {
-            System.out.println("Driver instance in test: " + driver);
-            HomePage hp = new HomePage(driver);
+            System.out.println("Driver instance in test: " + getDriver());
+            HomePage hp = new HomePage(getDriver());
             hp.ClickMyAccount();
             logger.info("Clicked on MyAccount Link...");
             hp.ClickLogin();
             logger.info("Clicked on Login account link....");
 
-            LoginPage loginPage = new LoginPage(driver);
+            LoginPage loginPage = new LoginPage(getDriver());
             logger.info("Entering valid email and password..");
             loginPage.setEmail(p.getProperty("email"));
             loginPage.setPassword(p.getProperty("password"));
             logger.info("clicked on login button..");
             loginPage.clickLogin();
 
-            MyAccountPage myAccountPage = new MyAccountPage(driver);
+            MyAccountPage myAccountPage = new MyAccountPage(getDriver());
             boolean targetPage = myAccountPage.isMyAccountDisplayed();
             Assert.assertTrue(targetPage, "Login failed");
         } catch (Exception e) {
