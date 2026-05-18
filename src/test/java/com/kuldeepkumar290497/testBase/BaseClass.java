@@ -58,7 +58,11 @@ private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
             {
                 capabilities.setPlatform(Platform.WIN10);
             }
-            else if (os.equalsIgnoreCase("mac"))
+            else if (os.equalsIgnoreCase("Linux"))
+            {
+                capabilities.setPlatform((Platform.LINUX));
+
+            } else if (os.equalsIgnoreCase("mac"))
             {
              capabilities.setPlatform((Platform.MAC));
             }
@@ -71,6 +75,7 @@ private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
             {
                 case "chrome": capabilities.setBrowserName("chrome"); break;
                 case "edge": capabilities.setBrowserName("MicrosoftEdge"); break;
+                case "firefox" : capabilities.setBrowserName("firefox"); break;
                 default: System.out.println("No matching browser"); return;
             }
 
