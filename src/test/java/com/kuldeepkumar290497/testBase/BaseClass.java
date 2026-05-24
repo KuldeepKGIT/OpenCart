@@ -1,5 +1,6 @@
 package com.kuldeepkumar290497.testBase;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +26,7 @@ import java.util.Properties;
 
 public class BaseClass {
 //    public static WebDriver driver;
-private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public static Logger logger;
     public Properties p;
 
@@ -113,20 +114,20 @@ private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     }
 
     public String randomString(){
-        return RandomStringUtils.random(5,true,false);
+        return RandomStringUtils.secure().nextAlphabetic(5);
     }
 
     public String randomNumeric(){
-        return RandomStringUtils.random(10,false,true);
+        return RandomStringUtils.secure().nextNumeric(10);
     }
 
     public String randomAlphaNumeric(){
-        String str = RandomStringUtils.random(3,true, false);
-        String num = RandomStringUtils.random(3,false, true);
+        String str = RandomStringUtils.secure().nextAlphabetic(3);
+        String num = RandomStringUtils.secure().nextNumeric(3);
         return str+"@"+num;
     }
 
-    public String captureScreen(String tname) {
+    public String captureScreen(String tname) throws IOException {
 
         String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 
@@ -136,7 +137,7 @@ private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
         String targetFilePath=System.getProperty("user.dir")+"\\screenshots\\" + tname + "_" + timeStamp + ".png";
         File targetFile=new File(targetFilePath);
 
-        sourceFile.renameTo(targetFile);
+        FileUtils.copyFile(sourceFile,targetFile);
 
         return targetFilePath;
 
