@@ -15,8 +15,9 @@
             </run>
         </groups>
         <classes>
-           <class name="com.kuldeepkumar290497.testCases.TC001AccountRegistrationTest"/>
-            <class name="com.kuldeepkumar290497.testCases.TC002LoginAccountTest"/>
+     <class name="com.kuldeepkumar290497.testCases.TC001AccountRegistrationTest"/>
+    <class name="com.kuldeepkumar290497.testCases.TC002LoginAccountTest"/>
+            <class name="com.kuldeepkumar290497.testCases.search.TC001SearchProductTest"/>
         </classes>
     </test>
 </suite>
